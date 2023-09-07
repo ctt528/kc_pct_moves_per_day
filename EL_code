@@ -1,0 +1,29 @@
+
+{   Atr as a percentage of yesterday's close price  } // for radarscreen
+
+inputs:
+	ATRLength( 14 ) [DisplayName = "ATRLength", ToolTip = 
+	 "Average True Range Length.  Enter the number of bars to use in the moving average of true range."];
+	 //Length ( 28 );
+
+variables:
+	ATR( 0 ),
+	Avg ( 0 ),
+	Moves_whatPerDayAVG(0),
+	Moves_whatPerDay (0); //PERCENTAGE
+
+ATR = AvgTrueRange( ATRLength ) ;
+//Create an ACB with truecandlebodyRange function.
+
+{  Plot1( ATR, !( "ATR" ) ) ;   }
+
+{  Avg = AverageFC( Atr, Length ) ;
+Plot2 ( avg, !( "avg of the ATR of the last 28 days" );  }
+
+ Moves_whatPerDay = (ATR / close[1]);
+// Moves_whatPerDayAVG = average(Moves_whatPerDay, Length); 
+ 
+ //Plot1(Moves_whatPerDay);
+Plot1(Moves_whatPerDay, !("Can move % per day"));
+//print(symbol,"		",atr,"	  "	, close[1]);
+
